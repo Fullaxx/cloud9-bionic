@@ -7,6 +7,10 @@ FROM ubuntu:bionic
 MAINTAINER Brett Kuskie <fullaxx@gmail.com>
 
 # ------------------------------------------------------------------------------
+# Set environment variables
+# ENV DEBIAN_FRONTEND noninteractive
+
+# ------------------------------------------------------------------------------
 # Install base and clean up when done
 RUN apt-get update && apt-get install -y --no-install-recommends tmux nodejs \
 build-essential g++ locales curl git ca-certificates python2.7-minimal supervisor && \
@@ -19,7 +23,7 @@ RUN sed -e 's/# en_US.UTF-8/en_US.UTF-8/' -i /etc/locale.gen && locale-gen
 # ------------------------------------------------------------------------------
 # Install Cloud9
 RUN git clone https://github.com/c9/core.git /c9 && \
-cd /c9 && ./scripts/install-sdk.sh && mkdir /c9ws /var/log/supervisor
+cd /c9 && ./scripts/install-sdk.sh && mkdir /c9ws
 
 # ------------------------------------------------------------------------------
 # Add supervisord conf
